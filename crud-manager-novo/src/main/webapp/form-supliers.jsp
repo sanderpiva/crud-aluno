@@ -46,7 +46,7 @@
 
 			<div class="row">
 				<div class="form-group col-md-4">
-					<label for="company">Empresa vinculada ao fornecedor</label>
+					<label for="company">Fornecedor vinculado a empresa:</label>
 					 <select id="company"
 						class="form-control selectpicker" name="company" required
 						oninvalid="this.setCustomValidity('Por favor, informe a empresa.')"
