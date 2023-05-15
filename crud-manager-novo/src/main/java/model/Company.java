@@ -9,8 +9,6 @@ public class Company {
 	private Date start;
 	private Date end;
 	private User user;
-	private Supliers supliers;
-	
 	
 	public Company() {}
 	
@@ -52,12 +50,4 @@ public class Company {
 		return id;
 	}
 	
-	public Supliers getSupliers() {
-		return supliers;
-	}
-
-	public void setSupliers(Supliers supliers) {
-		this.supliers = supliers;
-	}
-
 }

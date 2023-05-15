@@ -54,9 +54,9 @@
 						<option value="">Selecione
 							uma empresa
 						</option>
-						<c:forEach var="companies" items="${company}">
-							<option value="${companies.getId()}">
-								${companies.getName()}
+						<c:forEach var="company" items="${company}">
+							<option value="${company.getId()}">
+								${company.getName()}
 							</option>
 						</c:forEach>
 					</select>
