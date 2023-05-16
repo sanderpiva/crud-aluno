@@ -3,6 +3,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -10,12 +11,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Company;
 import model.ModelException;
 import model.Supliers;
+import model.User;
+import model.dao.CompanyDAO;
 import model.dao.DAOFactory;
 import model.dao.SupliersDAO;
 
-@WebServlet(urlPatterns = {"/supliers", "/supliers/form", "/supliers/delete", "/supliers/insert", "/supliers/update"})
+
+//"/supliers", "/supliers/form", "/supliers/delete", "/supliers/insert", "/supliers/update"
+@WebServlet(urlPatterns = {"/supliers/form","/supliers/insert"})
 public class SupliersController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -42,11 +48,11 @@ public class SupliersController extends HttpServlet {
 			break;
 		}
 		default:
-			listSupliers(req);
+			//listSupliers(req);
 			
-			ControllerUtil.transferSessionMessagesToRequest(req);
+			//ControllerUtil.transferSessionMessagesToRequest(req);
 		
-			ControllerUtil.forward(req, resp, "/supliers.jsp");
+			//ControllerUtil.forward(req, resp, "/supliers.jsp");
 		}
 	}
 	
@@ -66,6 +72,10 @@ public class SupliersController extends HttpServlet {
 			break;	
 		case "/crud-manager/supliers/insert": {
 			//insertUser(req, resp);
+			//PrintWriter p = resp.getWriter();
+			//p.print("mapa ok");
+			
+			insertSupliers(req, resp);
 			break;
 		}
 		case "/crud-manager/supliers/update": {
@@ -77,7 +87,7 @@ public class SupliersController extends HttpServlet {
 			break;
 		}
 			
-		ControllerUtil.redirect(resp, req.getContextPath() + "/supliers");
+		
 	}
 	
 	/*
@@ -104,7 +114,39 @@ public class SupliersController extends HttpServlet {
 		return null;
 	}*/
 	
-	private void listSupliers(HttpServletRequest req) {
+	private void insertSupliers(HttpServletRequest req, HttpServletResponse resp) {
+		// TODO Auto-generated method stub
+		String supliersName = req.getParameter("name");
+		String supliersPhone = req.getParameter("phone");
+		String supliersEmail = req.getParameter("email");
+		//user: nome do select
+		Integer companyId = Integer.parseInt(req.getParameter("company"));
+		
+		Supliers s = new Supliers();
+		s.setName(supliersName);
+		s.setTelephone(supliersPhone);
+		s.setEmail(supliersEmail);
+		s.setCompany(new Company(companyId));
+		//persistencia
+		SupliersDAO dao = DAOFactory.createDAO(SupliersDAO.class);
+		
+		try {
+			if (dao.save(s)) {
+				ControllerUtil.sucessMessage(req, "Fornecedor '" + s.getName() + "' salvo com sucesso.");
+			}
+			else {
+				ControllerUtil.errorMessage(req, "Fornecedor '" + s.getName() + "' não pode ser salvo.");
+			}
+		} catch (ModelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ControllerUtil.errorMessage(req, e.getMessage());
+		}
+
+	}
+
+
+	/*private void listSupliers(HttpServletRequest req) {
 		SupliersDAO dao = DAOFactory.createDAO(SupliersDAO.class);
 		
 		List<Supliers> supliers = null;
@@ -117,7 +159,7 @@ public class SupliersController extends HttpServlet {
 		
 		if (supliers != null)
 			req.setAttribute("supliers", supliers);
-	}
+	}*/
 	/*
 	private void insertUser(HttpServletRequest req, HttpServletResponse resp) {
 		String userName = req.getParameter("name");

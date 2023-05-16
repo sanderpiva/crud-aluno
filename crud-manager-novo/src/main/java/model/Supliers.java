@@ -36,7 +36,7 @@ public class Supliers {
 	public int getId() {
 		return id;
 	}
-
+	
 	public Company getCompany() {
 		return company;
 	}

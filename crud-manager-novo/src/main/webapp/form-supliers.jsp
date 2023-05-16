@@ -13,7 +13,7 @@
 
 		<h3 class="page-header">Adicionar Fornecedor</h3>
 
-		<form action="${pageContext.request.contextPath}/company/${action}"
+		<form action="${pageContext.request.contextPath}/supliers/${action}"
 			method="POST">
 			<div class="row">
 				<div class="form-group col-md-4">
@@ -54,20 +54,20 @@
 						<option value="">Selecione
 							uma empresa
 						</option>
-						<c:forEach var="company" items="${company}">
+						<c:forEach var="company" items="${companies}">
 							<option value="${company.getId()}">
 								${company.getName()}
 							</option>
 						</c:forEach>
 					</select>
-				</div>
-				<hr />
-				<div id="actions" class="row pull-right">
-					<div class="col-md-12">
-						<a href="${pageContext.request.contextPath}/supliers" class="btn btn-default">Cancelar</a>
-						<button type="submit" class="btn btn-primary">Cadastrar fornecedor</button>
+				</div> 
+					<hr />
+					<div id="actions" class="row pull-right">
+						<div class="col-md-12">
+							<a href="${pageContext.request.contextPath}/supliers" class="btn btn-default">Cancelar</a>
+							<button type="submit" class="btn btn-primary">Cadastrar fornecedor</button>
+						</div>
 					</div>
-				</div>
 
 			</div>
 

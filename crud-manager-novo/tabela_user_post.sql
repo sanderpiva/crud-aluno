@@ -36,4 +36,3 @@ INSERT INTO posts VALUES
 (DEFAULT, "Olá da Rosânia 1", CURDATE(), 5),
 (DEFAULT, "Olá da Rosânia 2", CURDATE(), 5),
 (DEFAULT, "Olá da Rosânia 3", CURDATE(), 5);
-companiescompanies
