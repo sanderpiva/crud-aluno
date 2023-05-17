@@ -48,15 +48,15 @@
 				<div class="form-group col-md-4">
 					<label for="company">Fornecedor vinculado a empresa:</label>
 					 <select id="company"
-						class="form-control selectpicker" name="company" required
+						class="form-control selectpicker" name="company" 
 						oninvalid="this.setCustomValidity('Por favor, informe a empresa.')"
 						oninput="setCustomValidity('')">
 						<option value="">Selecione
 							uma empresa
 						</option>
 						<c:forEach var="company" items="${companies}">
-							<option value="${company.getId()}">
-								${company.getName()}
+							<option value="${companies.getId()}">
+								${companies.getName()}
 							</option>
 						</c:forEach>
 					</select>

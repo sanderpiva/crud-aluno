@@ -6,9 +6,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import model.ModelException;
 import model.Supliers;
 import model.User;
+import model.Company;
 import model.dao.DAOFactory;
 import model.dao.UserDAO;
 import model.dao.SupliersDAO;
+import model.dao.CompanyDAO;
 
 public class CommonsController {
 	
@@ -40,5 +42,20 @@ public class CommonsController {
 		
 		if (listSupliers != null)
 			req.setAttribute("supliers", listSupliers);		
+	}
+	
+	public static void listCompany(HttpServletRequest req) {
+		CompanyDAO dao = DAOFactory.createDAO(CompanyDAO.class);
+		
+		List<Company> listCompanies = null;
+		try {
+			listCompanies = dao.listAll();
+		} catch (ModelException e) {
+			// Log no servidor
+			e.printStackTrace();
+		}
+		
+		if (listCompanies != null)
+			req.setAttribute("supliers", listCompanies);		
 	}
 }

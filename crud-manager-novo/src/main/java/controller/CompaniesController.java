@@ -1,8 +1,8 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Calendar;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,12 +11,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Company;
 import model.ModelException;
-import model.Post;
 import model.User;
 import model.dao.CompanyDAO;
 import model.dao.DAOFactory;
 
-@WebServlet(urlPatterns = {"/company/form", "/company/insert"})
+@WebServlet(urlPatterns = {"/companies","/company/form", "/company/insert"})
 public class CompaniesController extends HttpServlet {
 
 	@Override
@@ -43,7 +42,12 @@ public class CompaniesController extends HttpServlet {
 			break;
 		}
 		default:
-			
+			listCompany(req);
+
+			ControllerUtil.transferSessionMessagesToRequest(req);
+
+			ControllerUtil.forward(req, resp, "/companies.jsp");
+
 		}
 	}
 
@@ -103,5 +107,21 @@ public class CompaniesController extends HttpServlet {
 			e.printStackTrace();
 			ControllerUtil.errorMessage(req, e.getMessage());
 		}
+	}
+	
+	
+	private void listCompany(HttpServletRequest req) {
+		CompanyDAO dao = DAOFactory.createDAO(CompanyDAO.class);
+
+		List<Company> company = null;
+		try {
+			company = dao.listAll();
+		} catch (ModelException e) {
+			// Log no servidor
+			e.printStackTrace();
+		}
+
+		if (company != null)
+			req.setAttribute("company", company);
 	}
 }
