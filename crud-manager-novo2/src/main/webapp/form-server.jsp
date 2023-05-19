@@ -12,7 +12,7 @@
 			<h3 class="page-header">Adicionar Servidor</h3>
 
 			<form action="${pageContext.request.contextPath}/server/${action}" method="POST">
-				<input type="hidden" name="userId">
+				<input type="hidden" name="serverId">
 				<div class="row">
 					<div class="form-group col-md-4">
 					<label for="name">Nome</label>
@@ -20,7 +20,7 @@
 							   autofocus="autofocus" placeholder="Nome do servidor" 
 							   required oninvalid="this.setCustomValidity('Por favor, informe o nome do servidor.')"
 							   oninput="setCustomValidity('')"
-							   >
+							   value="${server.getName()}">
 					</div>
 					
 					<div class="form-group col-md-4">
@@ -29,7 +29,7 @@
 							   autofocus="autofocus" placeholder="Telefone do servidor (xx)xxxx-xxxx" 
 							   required oninvalid="this.setCustomValidity('Por favor, informe telefone do servidor.')"
 							   oninput="setCustomValidity('')"
-							   >
+							   value="${server.getTelephone()}">
 					</div>
 					
 					<div class="form-group col-md-4">
@@ -38,14 +38,14 @@
 							   autofocus="autofocus" placeholder="E-mail do servidor" 
 							   required oninvalid="this.setCustomValidity('Por favor, informe o email do servidor.')"
 							   oninput="setCustomValidity('')"
-							   >
+							   value="${server.getEmail()}">
 					</div>
 				</div>
 				<hr />
 				<div id="actions" class="row pull-right">
 					<div class="col-md-12">
 						<a href="${pageContext.request.contextPath}/servers" class="btn btn-default">Cancelar</a>
-						<button type="submit" class="btn btn-primary">Cadastrar Servidor</button>
+						<button type="submit" class="btn btn-primary">${not empty server ? "Alterar Servidor" : "Cadastrar Servidor"}</button>
 					</div>
 				</div>
 			</form>

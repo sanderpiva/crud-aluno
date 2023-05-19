@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.ModelException;
 import model.Server;
-import model.dao.CompanyDAO;
 import model.dao.DAOFactory;
 import model.dao.ServerDAO;
 
@@ -65,11 +64,12 @@ public class ServerController extends HttpServlet {
 			deleteServer(req, resp);
 			break;
 		case "/crud-manager/server/insert": {
-
 			insertServer(req, resp);
 			break;
 		}
 		case "/crud-manager/server/update": {
+			//PrintWriter p = resp.getWriter();
+			//p.print("mapa ok");			
 			updateServer(req, resp);
 			break;
 		}

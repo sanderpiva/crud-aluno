@@ -14,6 +14,7 @@ import model.ModelException;
 import model.User;
 import model.dao.CompanyDAO;
 import model.dao.DAOFactory;
+import model.dao.UserDAO;
 
 @WebServlet(urlPatterns = {"/companies","/company/form", "/company/insert"})
 public class CompaniesController extends HttpServlet {
@@ -73,6 +74,8 @@ public class CompaniesController extends HttpServlet {
 		default:
 			System.out.println("URL inválida " + action);
 		}
+		
+		ControllerUtil.redirect(resp, req.getContextPath() + "/companies");
 	}
 	
 	private void insertCompany(HttpServletRequest req, HttpServletResponse resp) {
