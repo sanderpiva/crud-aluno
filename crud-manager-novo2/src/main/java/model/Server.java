@@ -5,6 +5,7 @@ public class Server {
 	private String name;
 	private String telephone;
 	private String email;
+	private Company company;
 	
 	public Server() {
 		this(0);
@@ -35,6 +36,14 @@ public class Server {
 
 	public String getEmail() {
 		return email;
+	}
+	
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	public void setEmail(String email) {

@@ -47,26 +47,28 @@
 			                    <th>Nome</th>
 			                    <th>Telefone</th>
 			                    <th>E-mail</th>
+			                    <th>Empresa cliente</th>
 			                    <th>Editar</th>
 			                    <th>Excluir</th>
 			                 </tr>
 			            </thead>
 			            <tbody>
-			            	<c:forEach var="server" items="${server}">
+			            	<c:forEach var="serv" items="${server}">
 								<tr>
-				                    <td>${server.getName()}</td>
-				                    <td>${server.getTelephone()}</td>
-				                    <td>${server.getEmail()}</td>				                    
+				                    <td>${serv.getName()}</td>
+				                    <td>${serv.getTelephone()}</td>
+				                    <td>${serv.getEmail()}</td>
+				                    <td>${serv.getCompany().getName()}</td>				                    
 				                    <td class="actions">
 				                        <a class="btn btn-info btn-xs" 
-				                           href="${pageContext.request.contextPath}/server/update?serverId=${server.getId()}" >
+				                           href="${pageContext.request.contextPath}/server/update?serverId=${serv.getId()}" >
 				                           <span class="glyphicon glyphicon-edit"></span>
 				                        </a>
 				                    </td>
 				                    <td class="actions">
 				                        <a class="btn btn-danger btn-xs modal-remove"
-				                           server-id="${server.getId()}" 
-				                           server-name="${server.getName()}" data-toggle="modal" 
+				                           server-id="${serv.getId()}" 
+				                           server-name="${serv.getName()}" data-toggle="modal" 
 				                           data-target="#delete-modal"  href="#"><span 
 				                           class="glyphicon glyphicon-trash"></span></a>
 				                    </td>

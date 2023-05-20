@@ -43,7 +43,7 @@ public class CompaniesController extends HttpServlet {
 			break;
 		}
 		default:
-			listCompany(req);
+			listCompanies(req);
 
 			ControllerUtil.transferSessionMessagesToRequest(req);
 
@@ -78,6 +78,24 @@ public class CompaniesController extends HttpServlet {
 		ControllerUtil.redirect(resp, req.getContextPath() + "/companies");
 	}
 	
+
+	private void listCompanies(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		CompanyDAO dao = DAOFactory.createDAO(CompanyDAO.class);
+
+		List<Company> companies = null;
+		try {
+			companies = dao.listAll();
+		} catch (ModelException e) {
+			// Log no servidor
+			e.printStackTrace();
+		}
+
+		if (companies != null)
+			req.setAttribute("companies", companies);
+	}
+
+	
 	private void insertCompany(HttpServletRequest req, HttpServletResponse resp) {
 		// TODO Auto-generated method stub
 		//pega dados do form
@@ -92,8 +110,8 @@ public class CompaniesController extends HttpServlet {
 		comp.setName(companyName);
 		//comp.setRole("nos");
 		comp.setRole(role);
-		comp.setStart(Calendar.getInstance().getTime());
-		comp.setEnd(Calendar.getInstance().getTime());
+		comp.setStart(ControllerUtil.formatDate(start));
+		comp.setEnd(ControllerUtil.formatDate(end));
 		comp.setUser(new User(userId));
 		//persistencia
 		CompanyDAO dao = DAOFactory.createDAO(CompanyDAO.class);
@@ -113,7 +131,7 @@ public class CompaniesController extends HttpServlet {
 	}
 	
 	
-	private void listCompany(HttpServletRequest req) {
+	/*private void listCompany(HttpServletRequest req) {
 		CompanyDAO dao = DAOFactory.createDAO(CompanyDAO.class);
 
 		List<Company> company = null;
@@ -126,5 +144,5 @@ public class CompaniesController extends HttpServlet {
 
 		if (company != null)
 			req.setAttribute("company", company);
-	}
+	}*/
 }

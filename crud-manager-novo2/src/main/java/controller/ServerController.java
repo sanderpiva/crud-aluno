@@ -11,9 +11,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.ModelException;
 import model.Server;
+import model.User;
 import model.dao.DAOFactory;
 import model.dao.ServerDAO;
 
+
+//chave estrangeira no server vinculando a company(ies)
 
 @WebServlet(urlPatterns = {"/servers", "/server/form", "/server/insert", "/server/update", "/server/delete"})
 public class ServerController extends HttpServlet {
@@ -41,6 +44,14 @@ public class ServerController extends HttpServlet {
 			break;
 		}
 		case "/crud-manager/server/update": {
+			
+			//System.out.println("update chamada");
+			listServer(req);
+			Server server = loadServer(req);
+			req.setAttribute("server", server);
+			req.setAttribute("action", "update");
+			ControllerUtil.forward(req, resp, "/form-server.jsp");
+			
 			break;
 		}
 		default:
