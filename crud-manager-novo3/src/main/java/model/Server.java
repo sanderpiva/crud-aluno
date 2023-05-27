@@ -3,6 +3,7 @@ package model;
 public class Server {
 	private int id;
 	private String name;
+	private String address;
 	private String telephone;
 	private String email;
 	private Company company;
@@ -14,6 +15,7 @@ public class Server {
 	public Server(int id) {
 		this.id = id;
 		setName("");
+		setAddress("");
 		setTelephone("");
 		setEmail("");
 	}
@@ -26,10 +28,20 @@ public class Server {
 		this.name = name;
 	}
 
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+		
 	public String getTelephone() {
 		return telephone;
 	}
-
+	
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}

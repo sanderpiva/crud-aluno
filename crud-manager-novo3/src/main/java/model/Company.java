@@ -49,5 +49,4 @@ public class Company {
 	public int getId() {
 		return id;
 	}
-	
 }

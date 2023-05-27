@@ -11,17 +11,22 @@
 
 	<div id="container" class="container-fluid">
 
-		<h3 class="page-header">Adicionar Empresa</h3>
+		<h3 class="page-header">${not empty company ? 'Atualizar' : 'Adicionar'} Empresa</h3>
 
 		<form action="${pageContext.request.contextPath}/company/${action}"
 			method="POST">
+			
+			<input type="hidden" value="${company.getId()}" name="companyId">
+				
 			<div class="row">
 				<div class="form-group col-md-6">
-					<label for="name">Nome</label> <input type="text"
+					<label for="name">Nome</label> 
+					<input type="text"
 						class="form-control" id="name" name="name" autofocus="autofocus"
 						placeholder="Nome Empresa" required
 						oninvalid="this.setCustomValidity('Por favor, informe o nome da empresa.')"
-						oninput="setCustomValidity('')">
+						oninput="setCustomValidity('')"
+						value="${company.getName()}">
 				</div>
 
 				<div class="form-group col-md-6">
@@ -29,7 +34,8 @@
 						class="form-control" id="role" name="role" autofocus="autofocus"
 						placeholder="Cargo ocupado" required
 						oninvalid="this.setCustomValidity('Por favor, informe o cargo ocupado.')"
-						oninput="setCustomValidity('')">
+						oninput="setCustomValidity('')"
+						value="${company.getRole()}">
 				</div>
 
 			</div>
@@ -40,7 +46,8 @@
 						class="form-control" id="start" name="start" autofocus="autofocus"
 						placeholder="Data de inicio" required
 						oninvalid="this.setCustomValidity('Por favor, informe a data de inicio.')"
-						oninput="setCustomValidity('')">
+						oninput="setCustomValidity('')"
+						value="${company.getStart()}">
 				</div>
 
 				<div class="form-group col-md-4">
@@ -48,7 +55,8 @@
 						class="form-control" id="end" name="end" autofocus="autofocus"
 						placeholder="Data de saida"
 						oninvalid="this.setCustomValidity('Por favor, informe a data de saida.')"
-						oninput="setCustomValidity('')">
+						oninput="setCustomValidity('')"
+						value="${company.getEnd()}">
 				</div>
 				
 				<div class="form-group col-md-4">
@@ -57,11 +65,10 @@
 						class="form-control selectpicker" name="user" required
 						oninvalid="this.setCustomValidity('Por favor, informe o usuário.')"
 						oninput="setCustomValidity('')">
-						<option value="">Selecione
-							um usuário
+						<option value="" ${not empty company ? "" : 'selected'}>Selecione um usuario
 						</option>
 						<c:forEach var="user" items="${users}">
-							<option value="${user.getId()}">
+							<option value="${user.getId()}" ${company.getUser().getId() == user.getId() ? 'selected' : ''}>
 								${user.getName()}
 							</option>
 						</c:forEach>
@@ -71,7 +78,8 @@
 				<div id="actions" class="row pull-right">
 					<div class="col-md-12">
 						<a href="${pageContext.request.contextPath}/companies" class="btn btn-default">Cancelar</a>
-						<button type="submit" class="btn btn-primary">Cadastrar empresa</button>
+						<button type="submit" class="btn btn-primary">
+						${not empty company ? 'Atualizar' : 'Cadastrar'} Empresa</button>
 					</div>
 				</div>
 

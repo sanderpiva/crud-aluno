@@ -9,9 +9,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Company;
 import model.ModelException;
 import model.Server;
 import model.User;
+import model.dao.CompanyDAO;
 import model.dao.DAOFactory;
 import model.dao.ServerDAO;
 
@@ -34,7 +36,7 @@ public class ServerController extends HttpServlet {
 			//PrintWriter p = resp.getWriter();
 			//p.print("mapa ok");
 
-			CommonsController.listUsers(req);
+			listCompanies(req);
 			//
 			req.setAttribute("action", "insert");
 			//
@@ -46,12 +48,33 @@ public class ServerController extends HttpServlet {
 		case "/crud-manager/server/update": {
 			
 			//System.out.println("update chamada");
-			listServer(req);
+			/*listCompanies(req);
 			Server server = loadServer(req);
 			req.setAttribute("server", server);
 			req.setAttribute("action", "update");
 			ControllerUtil.forward(req, resp, "/form-server.jsp");
+			*/
 			
+			String idStr = req.getParameter("serverId");
+			int idServer = Integer.parseInt(idStr);
+			
+			ServerDAO dao = DAOFactory.createDAO(ServerDAO.class);
+			Server server = null;
+			
+			try {
+				server = dao.findById(idServer);
+			} catch (ModelException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			CommonsController.listUsers(req);
+			req.setAttribute("action", "update");
+			req.setAttribute("server", server);
+			
+			ControllerUtil.forward(req, resp, "/form-server.jsp");		
+					
+	//
 			break;
 		}
 		default:
@@ -61,6 +84,23 @@ public class ServerController extends HttpServlet {
 
 			ControllerUtil.forward(req, resp, "/servers.jsp");
 		}
+	}
+
+	private void listServer(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		ServerDAO dao = DAOFactory.createDAO(ServerDAO.class);
+
+		List<Server> server = null;
+		try {
+			server = dao.listAll();
+		} catch (ModelException e) {
+			// Log no servidor
+			e.printStackTrace();
+		}
+
+		if (server != null)
+			req.setAttribute("server", server);
+
 	}
 
 	@Override
@@ -116,19 +156,19 @@ public class ServerController extends HttpServlet {
 	}
 	
 	
-	private void listServer(HttpServletRequest req) {
-		ServerDAO dao = DAOFactory.createDAO(ServerDAO.class);
+	private void listCompanies(HttpServletRequest req) {
+		CompanyDAO dao = DAOFactory.createDAO(CompanyDAO.class);
 
-		List<Server> server = null;
+		List<Company> companies = null;
 		try {
-			server = dao.listAll();
+			companies = dao.listAll();
 		} catch (ModelException e) {
 			// Log no servidor
 			e.printStackTrace();
 		}
 
-		if (server != null)
-			req.setAttribute("server", server);
+		if (companies != null)
+			req.setAttribute("companies", companies);
 	}
 
 
@@ -136,13 +176,19 @@ public class ServerController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//pega dados do form
 		String serverName = req.getParameter("name");
+		String serverAddress = req.getParameter("address");
 		String serverTelephone = req.getParameter("phone");
 		String serverEmail = req.getParameter("email");
+		String companyIdstr = req.getParameter("company");
+		Integer companyId = Integer.parseInt(companyIdstr);
 		
 		Server server = new Server();
 		server.setName(serverName);
+		server.setAddress(serverAddress);
 		server.setTelephone(serverTelephone);
 		server.setEmail(serverEmail);
+		server.setCompany(new Company(companyId));
+		
 		
 		ServerDAO dao = DAOFactory.createDAO(ServerDAO.class);
 		
@@ -164,14 +210,19 @@ public class ServerController extends HttpServlet {
 	
 	
 	private void updateServer(HttpServletRequest req, HttpServletResponse resp) {
+		String serverIdStr = req.getParameter("serverId");
 		String serverName = req.getParameter("name");
+		String serverAddress = req.getParameter("address");
 		String serverTelephone = req.getParameter("phone");
 		String serverEmail = req.getParameter("email");
-		
-		Server server = loadServer(req);
+		Integer companyId = Integer.parseInt(req.getParameter("company"));
+
+		Server server = new Server(Integer.parseInt(serverIdStr));
 		server.setName(serverName);
+		server.setAddress(serverAddress);
 		server.setTelephone(serverTelephone);
 		server.setEmail(serverEmail);
+		server.setCompany(new Company(companyId));
 		
 		
 		ServerDAO dao = DAOFactory.createDAO(ServerDAO.class);
@@ -182,13 +233,13 @@ public class ServerController extends HttpServlet {
 			}
 			else {
 				ControllerUtil.errorMessage(req, "Servidor '" + server.getName() + "' não pode ser atualizado.");
-			}
-				
+			}				
 		} catch (ModelException e) {
 			// log no servidor
 			e.printStackTrace();
 			ControllerUtil.errorMessage(req, e.getMessage());
 		}
+
 	}
 	
 	private void deleteServer(HttpServletRequest req, HttpServletResponse resp) {

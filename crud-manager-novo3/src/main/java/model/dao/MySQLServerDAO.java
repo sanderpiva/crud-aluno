@@ -17,13 +17,14 @@ public class MySQLServerDAO implements ServerDAO {
 		DBHandler db = new DBHandler();
 
 		String sqlInsert = "INSERT INTO servers VALUES "
-				+ " (DEFAULT, ?, ?, ?, ?);";
+				+ " (DEFAULT, ?, ?, ?, ?, ?);";
 
 		db.prepareStatement(sqlInsert);
 		db.setString(1, server.getName());
-		db.setString(2, server.getTelephone());
-		db.setString(3, server.getEmail());
-		db.setInt(4, server.getCompany().getId());
+		db.setString(2, server.getAddress());
+		db.setString(3, server.getTelephone());
+		db.setString(4, server.getEmail());
+		db.setInt(5, server.getCompany().getId());
 
 
 		return db.executeUpdate() > 0;
@@ -36,6 +37,7 @@ public class MySQLServerDAO implements ServerDAO {
 
 		String sqlUpdate = "UPDATE servers "
 				+ "SET nome = ?, "
+				+ "endereco = ?, "
 				+ "telefone = ?, "
 				+ "email = ? "
 				+ "company_id = ? "
@@ -45,10 +47,11 @@ public class MySQLServerDAO implements ServerDAO {
 		db.prepareStatement(sqlUpdate);
 
 		db.setString(1, server.getName());
-		db.setString(2, server.getTelephone());
-		db.setString(3, server.getEmail());
-		db.setInt(4, server.getCompany().getId());
-		db.setInt(5, server.getId());
+		db.setString(2, server.getAddress());
+		db.setString(3, server.getTelephone());
+		db.setString(4, server.getEmail());
+		db.setInt(5, server.getCompany().getId());
+		db.setInt(6, server.getId());
 
 		return db.executeUpdate() > 0;
 	}
@@ -98,30 +101,6 @@ public class MySQLServerDAO implements ServerDAO {
 		}
 
 		return servers;
-		/*DBHandler db = new DBHandler();
-
-		List<Server> servers = new ArrayList<Server>();
-
-		// Declara uma instrução SQL
-		String sqlQuery = " SELECT s.id AS server_id, c.*, "
-				+ " c.companyId "
-				+ " FROM servers s "
-				+ " INNER JOIN companies c "
-				+ " ON s.id = c.company_Id "
-				+ " ORDER BY content";
-
-		db.createStatement();
-
-		db.executeQuery(sqlQuery);
-
-		while (db.next()) {
-			Server s = createServer(db);
-
-			servers.add(s);
-		}
-
-		return servers;*/
-
 
 	}
 
@@ -157,8 +136,6 @@ public class MySQLServerDAO implements ServerDAO {
 		Company company = companyDAO.findById(db.getInt("company_id"));
 		s.setCompany(company);
 
-		return s;
-
-		
+		return s;		
 	}
 }

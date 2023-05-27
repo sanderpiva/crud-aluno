@@ -45,6 +45,7 @@
 			            <thead>
 			                <tr>
 			                    <th>Nome</th>
+			                    <th>Endereco</th>
 			                    <th>Telefone</th>
 			                    <th>E-mail</th>
 			                    <th>Empresa cliente</th>
@@ -56,6 +57,7 @@
 			            	<c:forEach var="serv" items="${server}">
 								<tr>
 				                    <td>${serv.getName()}</td>
+				                    <td>${serv.getAddress()}</td>
 				                    <td>${serv.getTelephone()}</td>
 				                    <td>${serv.getEmail()}</td>
 				                    <td>${serv.getCompany().getName()}</td>				                    
