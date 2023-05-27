@@ -13,7 +13,8 @@
 
 		<form action="${pageContext.request.contextPath}/server/${action}"
 			method="POST">
-			<input type="hidden" name="serverId">
+			<input type="hidden" value="${server.getId()}" name="serverId">
+			
 			<div class="row">
 				<div class="form-group col-md-3">
 					<label for="name">Nome</label> <input type="text"

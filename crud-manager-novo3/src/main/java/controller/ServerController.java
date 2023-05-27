@@ -55,6 +55,8 @@ public class ServerController extends HttpServlet {
 			ControllerUtil.forward(req, resp, "/form-server.jsp");
 			*/
 			
+			listCompanies(req);
+			
 			String idStr = req.getParameter("serverId");
 			int idServer = Integer.parseInt(idStr);
 			

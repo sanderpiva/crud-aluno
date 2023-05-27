@@ -39,7 +39,7 @@ public class MySQLServerDAO implements ServerDAO {
 				+ "SET nome = ?, "
 				+ "endereco = ?, "
 				+ "telefone = ?, "
-				+ "email = ? "
+				+ "email = ?, "
 				+ "company_id = ? "
 				+ "WHERE id = ?";
 
