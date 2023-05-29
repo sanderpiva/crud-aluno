@@ -20,6 +20,10 @@ public class Server {
 		setEmail("");
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -27,7 +31,6 @@ public class Server {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getAddress() {
 		return address;
@@ -37,11 +40,10 @@ public class Server {
 		this.address = address;
 	}
 
-		
 	public String getTelephone() {
 		return telephone;
 	}
-	
+
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
@@ -49,21 +51,17 @@ public class Server {
 	public String getEmail() {
 		return email;
 	}
-	
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Company getCompany() {
 		return company;
 	}
 
 	public void setCompany(Company company) {
 		this.company = company;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 }

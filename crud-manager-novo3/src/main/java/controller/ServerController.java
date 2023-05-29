@@ -46,16 +46,13 @@ public class ServerController extends HttpServlet {
 			break;
 		}
 		case "/crud-manager/server/update": {
-			
-			//System.out.println("update chamada");
+	
 			/*listCompanies(req);
 			Server server = loadServer(req);
-			req.setAttribute("server", server);
 			req.setAttribute("action", "update");
+			req.setAttribute("server", server);
 			ControllerUtil.forward(req, resp, "/form-server.jsp");
 			*/
-			
-			listCompanies(req);
 			
 			String idStr = req.getParameter("serverId");
 			int idServer = Integer.parseInt(idStr);
@@ -70,7 +67,7 @@ public class ServerController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			CommonsController.listUsers(req);
+			listCompanies(req);
 			req.setAttribute("action", "update");
 			req.setAttribute("server", server);
 			
@@ -80,7 +77,7 @@ public class ServerController extends HttpServlet {
 			break;
 		}
 		default:
-			listServer(req);
+			listServers(req);
 
 			ControllerUtil.transferSessionMessagesToRequest(req);
 
@@ -88,7 +85,7 @@ public class ServerController extends HttpServlet {
 		}
 	}
 
-	private void listServer(HttpServletRequest req) {
+	private void listServers(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		ServerDAO dao = DAOFactory.createDAO(ServerDAO.class);
 
@@ -218,10 +215,11 @@ public class ServerController extends HttpServlet {
 		String serverTelephone = req.getParameter("phone");
 		String serverEmail = req.getParameter("email");
 		Integer companyId = Integer.parseInt(req.getParameter("company"));
-
+		
 		Server server = new Server(Integer.parseInt(serverIdStr));
 		server.setName(serverName);
 		server.setAddress(serverAddress);
+			
 		server.setTelephone(serverTelephone);
 		server.setEmail(serverEmail);
 		server.setCompany(new Company(companyId));
@@ -272,5 +270,4 @@ public class ServerController extends HttpServlet {
 			ControllerUtil.errorMessage(req, e.getMessage());
 		}
 	}
-
 }
