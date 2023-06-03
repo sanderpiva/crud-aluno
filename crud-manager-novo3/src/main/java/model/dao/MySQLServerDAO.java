@@ -128,6 +128,7 @@ public class MySQLServerDAO implements ServerDAO {
 	private Server createServer(DBHandler db) throws ModelException {
 		Server s = new Server(db.getInt("id"));
 		s.setName(db.getString("nome"));
+		s.setAddress(db.getString("endereco"));
 		s.setTelephone(db.getString("telefone"));
 		s.setEmail(db.getString("email"));
 
