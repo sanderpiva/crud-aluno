@@ -5,6 +5,6 @@ CREATE TABLE IF NOT EXISTS serviceProviders(
     telefone VARCHAR(150) NOT NULL,
     email VARCHAR(150) NOT NULL,
     company_id INT(11) NOT NULL,
-    FOREIGN KEY (company_id)
-    REFERENCES companies (id)
+    FOREIGN KEY(company_id)
+    REFERENCES companies(id)
 );
