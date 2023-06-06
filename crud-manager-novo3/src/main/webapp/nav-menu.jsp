@@ -17,7 +17,7 @@
 				<li><a href="${pageContext.request.contextPath}"><span class="glyphicon glyphicon-home" /><strong>&nbspInício</strong></a></li>
 				<li><a href="${pageContext.request.contextPath}/users"><span class="glyphicon glyphicon-user" /><strong>&nbspUsuários</strong></a></li>
 				<li><a href="${pageContext.request.contextPath}"><span class="glyphicon glyphicon-pencil" /><strong>&nbspPosts</strong></a></li>
-				<li><a href="${pageContext.request.contextPath}/servers"><span class="glyphicon glyphicon-wrench" /><strong>&nbspServidores</strong></a></li>
+				<li><a href="${pageContext.request.contextPath}/serviceProviders"><span class="glyphicon glyphicon-wrench" /><strong>&nbspPrestadores de Serviço</strong></a></li>
 				<li><a href="${pageContext.request.contextPath}/companies"><span class="glyphicon glyphicon-briefcase" /><strong>&nbspEmpresas</strong></a></li>
 				<li class="dropdown">
 			        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><strong>Perfil</strong>

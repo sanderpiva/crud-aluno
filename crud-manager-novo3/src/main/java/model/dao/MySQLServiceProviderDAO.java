@@ -6,36 +6,36 @@ import java.util.List;
 
 import model.Company;
 import model.ModelException;
-import model.Server;
+import model.ServiceProvider;
 
 
-public class MySQLServerDAO implements ServerDAO {
+public class MySQLServiceProviderDAO implements ServiceProviderDAO {
 
 	@Override
-	public boolean save(Server server) throws ModelException {
+	public boolean save(ServiceProvider serv) throws ModelException {
 		// TODO Auto-generated method stub
 		DBHandler db = new DBHandler();
 
-		String sqlInsert = "INSERT INTO servers VALUES "
+		String sqlInsert = "INSERT INTO serviceproviders VALUES "
 				+ " (DEFAULT, ?, ?, ?, ?, ?);";
 
 		db.prepareStatement(sqlInsert);
-		db.setString(1, server.getName());
-		db.setString(2, server.getAddress());
-		db.setString(3, server.getTelephone());
-		db.setString(4, server.getEmail());
-		db.setInt(5, server.getCompany().getId());
+		db.setString(1, serv.getName());
+		db.setString(2, serv.getAddress());
+		db.setString(3, serv.getTelephone());
+		db.setString(4, serv.getEmail());
+		db.setInt(5, serv.getCompany().getId());
 
 
 		return db.executeUpdate() > 0;
 	}
 
 	@Override
-	public boolean update(Server server) throws ModelException {
+	public boolean update(ServiceProvider serv) throws ModelException {
 		// TODO Auto-generated method stub
 		DBHandler db = new DBHandler();
 
-		String sqlUpdate = "UPDATE servers "
+		String sqlUpdate = "UPDATE serviceproviders "
 				+ "SET nome = ?, "
 				+ "endereco = ?, "
 				+ "telefone = ?, "
@@ -46,26 +46,26 @@ public class MySQLServerDAO implements ServerDAO {
 
 		db.prepareStatement(sqlUpdate);
 
-		db.setString(1, server.getName());
-		db.setString(2, server.getAddress());
-		db.setString(3, server.getTelephone());
-		db.setString(4, server.getEmail());
-		db.setInt(5, server.getCompany().getId());
-		db.setInt(6, server.getId());
+		db.setString(1, serv.getName());
+		db.setString(2, serv.getAddress());
+		db.setString(3, serv.getTelephone());
+		db.setString(4, serv.getEmail());
+		db.setInt(5, serv.getCompany().getId());
+		db.setInt(6, serv.getId());
 
 		return db.executeUpdate() > 0;
 	}
 
 	@Override
-	public boolean delete(Server server) throws ModelException {
+	public boolean delete(ServiceProvider serv) throws ModelException {
 		// TODO Auto-generated method stub
 		DBHandler db = new DBHandler();
 
-		String sqlDelete = " DELETE FROM servers "
+		String sqlDelete = " DELETE FROM serviceproviders "
 				+ " WHERE id = ?;";
 
 		db.prepareStatement(sqlDelete);		
-		db.setInt(1, server.getId());
+		db.setInt(1, serv.getId());
 
 		try {
 
@@ -82,40 +82,39 @@ public class MySQLServerDAO implements ServerDAO {
 	}
 
 	@Override
-	public List<Server> listAll() throws ModelException {
+	public List<ServiceProvider> listAll() throws ModelException {
 		// TODO Auto-generated method stub
 		DBHandler db = new DBHandler();
 
-		List<Server> servers = new ArrayList<Server>();
+		List<ServiceProvider> serv = new ArrayList<ServiceProvider>();
 
-		// Declara um instrução SQL
-		String sqlQuery = "SELECT * FROM servers";
+		String sqlQuery = "SELECT * FROM serviceproviders";
 
 		db.createStatement();
 
 		db.executeQuery(sqlQuery);
 
 		while (db.next()) {
-			Server s = createServer(db);
-			servers.add(s);
+			ServiceProvider s = createServer(db);
+			serv.add(s);
 		}
 
-		return servers;
+		return serv;
 
 	}
 
 	@Override
-	public Server findById(int id) throws ModelException {
+	public ServiceProvider findById(int id) throws ModelException {
 		// TODO Auto-generated method stub
 		DBHandler db = new DBHandler();
 
-		String sql = "SELECT * FROM servers WHERE id = ?";
+		String sql = "SELECT * FROM serviceproviders WHERE id = ?";
 
 		db.prepareStatement(sql);
 		db.setInt(1, id);
 		db.executeQuery();
 
-		Server s = null;
+		ServiceProvider s = null;
 		while (db.next()) {
 			s = createServer(db);
 			break;
@@ -125,8 +124,8 @@ public class MySQLServerDAO implements ServerDAO {
 
 	}
 
-	private Server createServer(DBHandler db) throws ModelException {
-		Server s = new Server(db.getInt("id"));
+	private ServiceProvider createServer(DBHandler db) throws ModelException {
+		ServiceProvider s = new ServiceProvider(db.getInt("id"));
 		s.setName(db.getString("nome"));
 		s.setAddress(db.getString("endereco"));
 		s.setTelephone(db.getString("telefone"));

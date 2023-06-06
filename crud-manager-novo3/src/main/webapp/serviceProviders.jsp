@@ -18,12 +18,12 @@
 		
 	 	 	<div id="top" class="row">
 	 			<div class="col-md-3">
-			        <h3>Servidores</h3>
+			        <h3>Prestadores de Serviço</h3>
 			    </div>
 			 
 			    <div class="col-md-6">
 			        <div class="input-group h2">
-			            <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar servidores">
+			            <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar prestadores de serviço">
 			            <span class="input-group-btn">
 			                <button class="btn btn-danger" type="submit">
 			                    <span class="glyphicon glyphicon-search"></span>
@@ -33,7 +33,7 @@
 			    </div>
 			 
 			    <div class="col-md-3">
-			        <a href="/crud-manager/server/form" class="btn btn-danger pull-right h2"><span class="glyphicon glyphicon-plus" /></span>&nbspAdicionar Servidor</a>
+			        <a href="/crud-manager/serviceProvider/form" class="btn btn-danger pull-right h2"><span class="glyphicon glyphicon-plus" /></span>&nbspAdicionar Prestador Serviço</a>
 			    </div>
 	     	</div>
 	 
@@ -54,7 +54,7 @@
 			                 </tr>
 			            </thead>
 			            <tbody>
-			            	<c:forEach var="serv" items="${server}">
+			            	<c:forEach var="serv" items="${serviceProvider}">
 								<tr>
 				                    <td>${serv.getName()}</td>
 				                    <td>${serv.getAddress()}</td>
@@ -63,14 +63,14 @@
 				                    <td>${serv.getCompany().getName()}</td>				                    
 				                    <td class="actions">
 				                        <a class="btn btn-info btn-xs" 
-				                           href="${pageContext.request.contextPath}/server/update?serverId=${serv.getId()}" >
+				                           href="${pageContext.request.contextPath}/serviceProvider/update?serviceProviderId=${serv.getId()}" >
 				                           <span class="glyphicon glyphicon-edit"></span>
 				                        </a>
 				                    </td>
 				                    <td class="actions">
 				                        <a class="btn btn-danger btn-xs modal-remove"
-				                           server-id="${serv.getId()}" 
-				                           server-name="${serv.getName()}" data-toggle="modal" 
+				                           serv-id="${serv.getId()}" 
+				                           serv-name="${serv.getName()}" data-toggle="modal" 
 				                           data-target="#delete-modal"  href="#"><span 
 				                           class="glyphicon glyphicon-trash"></span></a>
 				                    </td>
@@ -107,11 +107,11 @@
 			    // ao clicar no delete de algum post, pega o nome do usuário, 
 			    // o id do usuário e a ação (delete) e envia para o modal 
 			    $(".modal-remove").click(function () {
-		            var serverName = $(this).attr('server-name');
-		            var serverId = $(this).attr('server-id');
-		            $(".modal-body #hiddenValue").text("o servidor '"+serverName+"'");
-		            $("#id").attr( "value", serverId);
-		            $("#form").attr( "action","server/delete");
+		            var servName = $(this).attr('serv-name');
+		            var servId = $(this).attr('serv-id');
+		            $(".modal-body #hiddenValue").text("o prestador serviço '"+servName+"'");
+		            $("#id").attr( "value", servId);
+		            $("#form").attr( "action","serviceProvider/delete");
 		        })
 			});
 		</script>

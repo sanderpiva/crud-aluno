@@ -1,6 +1,6 @@
 package model;
 
-public class Server {
+public class ServiceProvider {
 	private int id;
 	private String name;
 	private String address;
@@ -8,11 +8,11 @@ public class Server {
 	private String email;
 	private Company company;
 	
-	public Server() {
+	public ServiceProvider() {
 		this(0);
 	}
 	
-	public Server(int id) {
+	public ServiceProvider(int id) {
 		this.id = id;
 		setName("");
 		setAddress("");

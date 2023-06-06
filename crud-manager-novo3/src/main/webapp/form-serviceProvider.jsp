@@ -9,44 +9,44 @@
 	<%@include file="nav-menu.jsp"%>
 
 	<div id="container" class="container-fluid">
-		<h3 class="page-header">${not empty server ? 'Atualizar' : 'Adicionar'} Servidor</h3>
+		<h3 class="page-header">${not empty serviceProvider ? 'Atualizar' : 'Adicionar'} Prestador de Serviço</h3>
 
-		<form action="${pageContext.request.contextPath}/server/${action}"
+		<form action="${pageContext.request.contextPath}/serviceProvider/${action}"
 			method="POST">
-			<input type="hidden" value="${server.getId()}" name="serverId">
+			<input type="hidden" value="${serviceProvider.getId()}" name="serviceProviderId">
 			
 			<div class="row">
 				<div class="form-group col-md-3">
 					<label for="name">Nome</label> <input type="text"
 						class="form-control" id="name" name="name" autofocus="autofocus"
-						placeholder="Nome do servidor" required
-						oninvalid="this.setCustomValidity('Por favor, informe o nome do servidor.')"
-						oninput="setCustomValidity('')" value="${server.getName()}">
+						placeholder="Nome do prestador de serviço" required
+						oninvalid="this.setCustomValidity('Por favor, informe o nome do prestador de serviço.')"
+						oninput="setCustomValidity('')" value="${serviceProvider.getName()}">
 				</div>
 				
 				<div class="form-group col-md-3">
 					<label for="address">Endereco</label> <input type="text"
 						class="form-control" id="address" name="address" autofocus="autofocus"
-						placeholder="Endereço do servidor" required
-						oninvalid="this.setCustomValidity('Por favor, informe endereço do servidor.')"
-						oninput="setCustomValidity('')" value="${server.getAddress()}">
+						placeholder="Endereço do prestador de serviço" required
+						oninvalid="this.setCustomValidity('Por favor, informe endereço do prestador de serviço.')"
+						oninput="setCustomValidity('')" value="${serviceProvider.getAddress()}">
 				</div>
 				
 				<div class="form-group col-md-3">
 					<label for="phone">Telefone</label> <input type="text"
 						class="form-control" id="phone" name="phone" autofocus="autofocus"
-						placeholder="Telefone do servidor" required
-						oninvalid="this.setCustomValidity('Por favor, informe telefone do servidor.')"
-						oninput="setCustomValidity('')" value="${server.getTelephone()}">
+						placeholder="Telefone do prestador de serviço" required
+						oninvalid="this.setCustomValidity('Por favor, informe telefone do prestador de serviço.')"
+						oninput="setCustomValidity('')" value="${serviceProvider.getTelephone()}">
 				</div>
 				
 
 				<div class="form-group col-md-3">
 					<label for="email">E-mail</label> <input type="email"
 						class="form-control" id="email" name="email" autofocus="autofocus"
-						placeholder="E-mail do servidor" required
-						oninvalid="this.setCustomValidity('Por favor, informe o email do servidor.')"
-						oninput="setCustomValidity('')" value="${server.getEmail()}">
+						placeholder="E-mail do prestador de serviço" required
+						oninvalid="this.setCustomValidity('Por favor, informe o email do prestador de serviço.')"
+						oninput="setCustomValidity('')" value="${serviceProvider.getEmail()}">
 				</div>
 			</div>
 			<div class="row">
@@ -57,10 +57,10 @@
 						class="form-control selectpicker" name="company" required
 						oninvalid="this.setCustomValidity('Por favor, informe a empresa.')"
 						oninput="setCustomValidity('')">
-						<option value="" ${not empty server ? "" : 'selected'}>Selecione uma empresa 
+						<option value="" ${not empty serviceProvider ? "" : 'selected'}>Selecione uma empresa 
 						</option>
 						<c:forEach var="comp" items="${companies}">
-							<option value="${comp.getId()}" ${server.getCompany().getId() == comp.getId() ? 'selected' : ''}>
+							<option value="${comp.getId()}" ${serviceProvider.getCompany().getId() == comp.getId() ? 'selected' : ''}>
 							${comp.getName()}
 							</option>
 						</c:forEach>
@@ -72,10 +72,10 @@
 			<hr />
 			<div id="actions" class="row pull-right">
 				<div class="col-md-12">
-					<a href="${pageContext.request.contextPath}/servers"
+					<a href="${pageContext.request.contextPath}/serviceProviders"
 						class="btn btn-default">Cancelar</a>
 					<button type="submit" class="btn btn-primary">
-					${not empty server ? 'Atualizar' : 'Cadastrar'} Servidor</button>
+					${not empty serviceProvider ? 'Atualizar' : 'Cadastrar'} Prestador Serviço</button>
 				</div>
 			</div>
 		</form>
